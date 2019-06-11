@@ -5,9 +5,9 @@ const app = express();
 const bcrypt = require('bcryptjs');
 const _ = require('underscore');
 
-const { verficaToken, verficaAdmin_Role } = require('../middlewares/autenticacion');
+const { verificaToken, verificaAdmin_Role } = require('../middlewares/autenticacion');
 
-app.get('/usuario', verficaToken, (req, res) => {
+app.get('/usuario', verificaToken, (req, res) => {
     let desde = req.query.desde || 0;
     desde = Number(desde);
     let limite = req.query.limite || 5;
@@ -33,7 +33,7 @@ app.get('/usuario', verficaToken, (req, res) => {
         })
 });
 
-app.post('/usuario', [verficaToken, verficaAdmin_Role], (req, res) => {
+app.post('/usuario', [verificaToken, verificaAdmin_Role], (req, res) => {
 
     let body = req.body;
 
@@ -67,7 +67,7 @@ app.post('/usuario', [verficaToken, verficaAdmin_Role], (req, res) => {
 
 });
 
-app.put('/usuario/:id', [verficaToken, verficaAdmin_Role], (req, res) => {
+app.put('/usuario/:id', [verificaToken, verificaAdmin_Role], (req, res) => {
 
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
@@ -88,7 +88,7 @@ app.put('/usuario/:id', [verficaToken, verficaAdmin_Role], (req, res) => {
     })
 });
 
-app.delete('/usuario/:id', [verficaToken, verficaAdmin_Role], (req, res) => {
+app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], (req, res) => {
 
     let id = req.params.id;
 
